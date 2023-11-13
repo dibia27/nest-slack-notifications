@@ -18,7 +18,7 @@ jobs:
           template: success_tagged_deploy_1
       - slack/notify:
           event: fail
-          mentions: "@dibia27"
+          mentions: "@dibia"
           template: basic_fail_1
       - twilio/sendsms:
           body: Hi Twilio, you have reached the number of dibia27, How may I help you today?
