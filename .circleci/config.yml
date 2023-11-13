@@ -1,17 +1,24 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.3
+  slack: circleci/slack@4.10.1
 jobs:
   build-test-and-notify:
     executor:
       name: node/default
     steps:
       - checkout
-      - run: sudo npm install -g npm@latest
       - run:
           name: Install dependencies
           command: npm install
       - run: npm test
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+      - slack/notify:
+          event: fail
+          mentions: "@dibia27"
+          template: basic_fail_1
 workflows:
   build-and-notify:
     jobs:
