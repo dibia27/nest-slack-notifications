@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
   slack: circleci/slack@4.10.1
+  twilio: circleci/twilio@1.0.0
 jobs:
   build-test-and-notify:
     executor:
@@ -19,6 +20,10 @@ jobs:
           event: fail
           mentions: "@dibia27"
           template: basic_fail_1
+      - twilio/sendsms:
+          body: Hi Twilio, you have reached the number of dibia27, How may I help you today?
+      - twilio/alert:
+          body: Twilio Unable to reach dibia27
 workflows:
   build-and-notify:
     jobs:
